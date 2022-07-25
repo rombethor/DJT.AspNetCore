@@ -12,6 +12,8 @@
     <Description>Useful components for using AspNetCore</Description>
     <Copyright>Daniel James Thorne</Copyright>
     <RepositoryUrl>https://github.com/rombethor/DJT.AspNetCore</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
