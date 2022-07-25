@@ -2,23 +2,37 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.CodeAnalysis;
 
-namespace DJT.AspNetCore
+namespace DJT.AspNetCore.Mvc
 {
+    /// <summary>
+    /// Provides for HttpResponseMessage as response to controller actions.
+    /// </summary>
     public class HttpResponseMessageResult : IActionResult
     {
         private readonly HttpResponseMessage _responseMessage;
+
+        /// <summary>
+        /// Constructor, requires an HttpResponseMessage
+        /// </summary>
+        /// <param name="responseMessage">The message to provide</param>
         public HttpResponseMessageResult([NotNull]HttpResponseMessage responseMessage)
         {
             _responseMessage = responseMessage;
         }
 
+        /// <summary>
+        /// Provides HTTP response for HttpResponseMessage as part of action result
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task ExecuteResultAsync([NotNull]ActionContext context)
         {
             var response = context.HttpContext.Response;
             if (_responseMessage == null)
                 throw new InvalidOperationException("Null HttpResponseMessage unacceptable!");
 
-            using (_responseMessage)
+            using (_responseMessage) 
             {
                 response.StatusCode = (int)_responseMessage.StatusCode;
                 var responseFeature = context.HttpContext.Features.Get<IHttpResponseFeature>();
